@@ -3,6 +3,9 @@
 
 all: help
 
+test:
+	python -m pytest
+
 install:
 	python setup.py install
 
