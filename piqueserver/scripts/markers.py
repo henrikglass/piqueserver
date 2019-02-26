@@ -236,6 +236,10 @@ class BaseMarker():
     def send_block_remove(self, sender, x, y, z):
         self.send_block(sender, x, y, z, DESTROY_BLOCK)
 
+    def __repr__(self):
+        return "{}(team={},color={}, protocol={}, x={}, y={})".format(
+            self.team,self.color , self.protocol, self.x, self.y
+        )
 
 def parse_string_map(xs_and_dots):
     """greedily attempt to get the least amount of lines and blocks required

@@ -66,6 +66,10 @@ class TimedMute(object):
             self.player.name, self.time)
         self.player.protocol.send_chat(message, irc=True)
 
+    def __repr__(self):
+        return "{}(player={}, time={})".format(
+            self.player, self.time
+        )
 
 def apply_script(protocol, connection, config):
     class TimedMuteConnection(connection):

@@ -95,6 +95,10 @@ class DummyPlayer():
         player_left.player_id = self.player_id
         self.protocol.broadcast_contained(player_left, save=True)
 
+    def __repr__(self):
+        return "{}(team={}, player_id={}, protocol={})".format(
+            self.team, self.player_id, self.protocol
+        )
 
 def apply_script(protocol, connection, config):
     class InfiltrationConnection(connection):
