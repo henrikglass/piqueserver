@@ -58,6 +58,12 @@ class IDPool(object):
     def put_back(self, id):
         self.free_ids.append(id)
 
+    def __repr__(self):
+       return (f'{self.__class__.__name__}('
+               f'{self.free_ids!r}, {self.new_ids!r})')
+
+    def __str__(self):
+        return f'{self.free_ids}'
 
 class AttributeSet(set):
     """
