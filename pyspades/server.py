@@ -36,6 +36,8 @@ from pyspades import contained as loaders
 from pyspades.common import make_color
 from pyspades.mapgenerator import ProgressiveMapGenerator
 
+from util import rename_decorator
+
 fog_color = loaders.FogColor()
 world_update = loaders.WorldUpdate()
 intel_capture = loaders.IntelCapture()
@@ -176,6 +178,11 @@ class ServerProtocol(BaseProtocol):
 
     # backwards compatability
     send_contained = broadcast_contained
+
+    @rename_decorator
+    def send_contained(*args,**kwargs):
+        """broadcast_contained"""
+        return broadcast_contained(*arg, **kwargs)
 
     def reset_tc(self):
         self.entities = self.get_cp_entities()
@@ -385,7 +392,14 @@ class ServerProtocol(BaseProtocol):
             player.send_chat(message, global_message)
 
     # backwards compatability
-    send_chat = broadcast_chat
+    #send_chat = broadcast_chat
+
+    @rename_decorator
+    def send_chat(*args,**kwargs):
+        """broadcast_chat"""
+        return broadcast_chat(*arg, **kwargs)
+
+
 
     def broadcast_chat_warning(self, message, team=None):
         """

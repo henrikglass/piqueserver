@@ -64,6 +64,9 @@ from piqueserver.networkdict import NetworkDict
 from piqueserver.player import FeatureConnection
 from piqueserver.config import config
 
+from util import rename_decorator
+
+
 # won't be used; just need to be executed
 import piqueserver.core_commands
 
@@ -844,7 +847,13 @@ class FeatureProtocol(ServerProtocol):
         ServerProtocol.send_chat(self, value, global_message, sender, team)
 
     # backwards compatability
-    send_chat = broadcast_chat
+    #send_chat = broadcast_chat
+    @rename_decorator
+    def send_chat(*args,**kwargs):
+        """broadcast_chat"""
+        return broadcast_chat(*arg, **kwargs)
+
+
 
     # log high CPU usage
 
